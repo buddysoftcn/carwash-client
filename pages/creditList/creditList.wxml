@@ -1,0 +1,21 @@
+<!--pages/creditList/creditList.wxml-->
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">当前信用值：100%</view>
+        <view class="weui-cell__ft"></view>
+    </view>
+</view>
+
+<view class="weui-cells__title">信用记录</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">2010.04.15</view>
+        <view class="weui-cell__ft">违约原因：取消预约</view>
+    </view>
+     <view class="weui-cell">
+        <view class="weui-cell__bd">2010.04.15</view>
+        <view class="weui-cell__ft">恢复信用值</view>
+    </view>
+</view>
+
+<view class="cells-footer_title">当信用降低后，假如 30 天内没有再次发生违约，信用值将会自动恢复到100%。</view>

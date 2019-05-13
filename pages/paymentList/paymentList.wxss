@@ -1,0 +1,41 @@
+/* pages/paymentList/paymentList.wxss */
+.cell {
+  margin: 16rpx;
+  background-color:white;
+  height: 216rpx;
+}
+
+.cell-content {
+   margin-left:32rpx;
+   margin-right: 32rpx;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.cell-car_img {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+
+.cell-car_number {
+  padding-right: 40rpx;
+}
+
+.cell-car_oval {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+
+.cell-car_employe {
+  font-size: 22rpx;
+  color:#6D7278;
+}
+
+.text-align_right {
+  text-align: right;
+}

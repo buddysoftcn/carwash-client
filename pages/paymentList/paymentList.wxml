@@ -1,0 +1,34 @@
+<!--pages/paymentList/paymentList.wxml-->
+<view class="cell">
+  <view class="weui-flex cell-content">
+    <view style=''><image mode="aspectFit" class="cell-car_img" src="../../images/car.png"></image><text class="font-size_13">预约洗车</text></view>
+    <view style='color:#F7B500;' class="font-size_13 font-weight_500 text-align_right">交易成功</view>
+  </view>
+
+   <view style='margin-top:10rpx;margin-bottom:10rpx;' class="weui-flex cell-content">
+    <view style=''><text class="cell-car_number font-size_13">车牌号：</text><text class="font-size_13">PU220</text></view>
+    <view style='' class="text-align_right"><text style='padding-right:10rpx;' class="font-color_4a font-size_13">现金</text><text class="font-size_13">￥300.00</text></view>
+  </view>
+
+   <view class="weui-flex cell-content">
+    <view style=''><image class="cell-car_oval" src="../../images/oval.png"></image><text class="cell-car_employe">店员：毛毛要吃鱼</text></view>
+    <view style='color:#6D7278;' class="font-size_13 text-align_right">2019.03.15 08:20</view>
+   </view>
+</view>
+
+<view class="cell">
+  <view class="weui-flex cell-content">
+    <view style=''><image mode="aspectFit" class="cell-car_img" src="../../images/car.png"></image><text class="font-size_13">预约洗车</text></view>
+    <view style='color:#F7B500;' class="font-size_13 font-weight_500 text-align_right">交易成功</view>
+  </view>
+
+   <view style='margin-top:10rpx;margin-bottom:10rpx;' class="weui-flex cell-content">
+    <view style=''><text class="cell-car_number font-size_13">车牌号：</text><text class="font-size_13">PU220</text></view>
+    <view style='' class="text-align_right"><text style='padding-right:10rpx;' class="font-color_4a font-size_13">现金</text><text class="font-size_13">￥300.00</text></view>
+  </view>
+
+   <view class="weui-flex cell-content">
+    <view style=''><image class="cell-car_oval" src="../../images/oval.png"></image><text class="cell-car_employe">店员：毛毛要吃鱼</text></view>
+    <view style='color:#6D7278;' class="font-size_13 text-align_right">2019.03.15 08:20</view>
+   </view>
+</view>

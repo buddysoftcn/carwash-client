@@ -1,0 +1,17 @@
+<!--pages/paymentView/paymentView.wxml-->
+<view class="weui-cells__title">选择充值类型</view>
+<view class="weui-cells weui-cells_after-title">
+    <checkbox-group bindchange="checkboxChange">
+        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+    </checkbox-group>     
+</view>
+
+<button style='margin-top:112rpx;' class="margin-right_16 margin-left_16" type="primary" bindtap="onSave">支付：￥250</button>

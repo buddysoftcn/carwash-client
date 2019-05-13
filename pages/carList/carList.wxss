@@ -1,0 +1,21 @@
+/* pages/carList/carList.wxss */
+.cell {
+  margin:16rpx;
+  background-color: white;
+  height: 180rpx;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cell-content {
+  align-items: center;
+  justify-content: space-between;
+  margin: 32rpx;
+}
+
+.action-sheet_del {
+  color: #e02020;
+}
+

@@ -1,0 +1,78 @@
+/* pages/my/my.wxss */
+.card-view {
+  height: 292rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-view_backgound-image {
+    width: 100%;
+    height:292rpx;
+}
+
+.card-view_backgound-image {
+  width: 100%;
+  height: 292rpx;
+}
+
+.card-view_content {
+  position: absolute;
+  align-items: center;
+  height: 292rpx;
+  width: 100%;
+  z-index: 1;
+}
+
+.card-view_content-add-card {
+  width: 320rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border: 1rpx solid #F7B500;
+  border-radius: 44rpx;
+  color:#F7B500;
+  text-align: center;
+}
+
+.card-view_content-oval {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  
+}
+
+.card-view_content-oval-normal {
+  border:1rpx solid #fff;
+}
+.card-view_content-oval-vip {
+  border:1rpx solid #FBC531;
+}
+
+.card-view_content-role {
+  width: 112rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 18rpx;
+  background-color: #444;
+  border-radius: 20rpx;
+  margin-top:-20rpx;
+}
+
+.card-view_content-payment {
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border: 1rpx solid #fff;
+  border-radius: 5rpx;
+  margin-top: 210rpx;
+  margin-left: 85rpx;
+}
+
+.font-color_vip {
+  color:#F7B500;
+}

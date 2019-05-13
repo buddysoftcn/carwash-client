@@ -1,0 +1,34 @@
+<!--pages/carList/carList.wxml-->
+<view class="cell">
+  <view class="weui-flex cell-content">
+    <view class="font-size_17">豫CHP516</view> <van-icon bind:click="onShowMore" name="ellipsis" />
+  </view>
+  <view class="weui-flex cell-content">
+    <view class="font-size_14 font-color_666">轿车</view> <view class="font-color_yellow font-size_12">已绑定到会员卡</view>
+  </view>
+</view>
+
+<view class="cell">
+  <view class="weui-flex cell-content">
+    <view class="font-size_17">豫CHP516</view> <van-icon name="ellipsis" />
+  </view>
+  <view class="weui-flex cell-content">
+    <view class="font-size_14 font-color_666">轿车</view> <view class="font-color_yellow font-size_12"></view>
+  </view>
+</view>
+
+<view class="add-view">
+  <view class="weui-flex add-view_inner" bindtap='onEditCar'>
+    <image class="add-view_image" src="../../images/add_employees.png"/> 
+    <label>添加车牌</label>
+  </view>
+</view>
+
+<van-action-sheet
+  title="豫CHP516"
+  show="{{ show }}"
+  cancel-text="取消"
+  actions="{{ actions }}"
+  bind:close="onClose"
+  bind:select="onSelect"
+/>

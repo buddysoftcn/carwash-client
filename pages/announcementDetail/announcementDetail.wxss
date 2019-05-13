@@ -1,0 +1,9 @@
+/* pages/announcementDetail/announcementDetail.wxss */
+.swiper-view {
+  width: 100%;
+  height: 209px;
+}
+
+.title {
+  margin-top:16px;
+}

@@ -1,0 +1,10 @@
+/* pages/goodsDetail/goodsDetail.wxss */
+.swiper-view {
+  width: 750rpx;
+  height: 750rpx;
+}
+
+.title {
+  margin-top:16px;
+  font-size: 48rpx;
+}

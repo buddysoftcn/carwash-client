@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "车牌管理",
+  "usingComponents": {
+    "van-icon": "../../lib/dist/icon/index",
+    "van-action-sheet": "../../lib/dist/action-sheet/index"
+  }
+}

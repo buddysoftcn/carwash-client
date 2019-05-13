@@ -1,0 +1,41 @@
+{
+  "pages": [
+    
+    "pages/home/home",
+    "pages/my/my",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/announcementDetail/announcementDetail",
+    "pages/goodsDetail/goodsDetail",
+    "pages/creditList/creditList",
+    "pages/paymentList/paymentList",
+    "pages/paymentView/paymentView",
+    "pages/editCar/editCar",
+    "pages/carList/carList"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "微店",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_on.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tab_my.png",
+        "selectedIconPath": "images/tab_my_on.png"
+      }
+    ],
+    "color": "#9b9b9b",
+    "selectedColor": "#9b9b9b"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,124 @@
+/**app.wxss**/
+@import 'weui.wxss';
+page{
+  background-color: #efeff4;
+}
+
+.font-size_12 {
+  font-size: 24rpx;
+}
+
+.font-size_13 {
+  font-size: 26rpx;
+}
+
+.font-size_14 {
+  font-size: 28rpx;
+}
+
+.font-size_15 {
+  font-size: 30rpx;
+}
+
+.font-size_17 {
+  font-size: 34rpx;
+}
+
+.font-color_white {
+  color:white;
+}
+.font-color_red {
+  color:#e02020;
+}
+
+.font-color_yellow {
+  color:#FBC531;
+}
+.font-color_44 {
+  color: #444;
+}
+
+.font-color_4a {
+  color:#4a4a4a;
+}
+
+.font-color_fa6400 {
+  color: #fa6400;
+}
+
+.font-color_666 {
+  color: #666;
+}
+
+.font-color_999 {
+  color:#999;
+}
+
+.font-weight_500 {
+  font-weight: 500;
+}
+
+.margin-top_16 {
+  margin-top: 32rpx;
+}
+
+.margin-left_16 {
+  margin-left: 32rpx;  
+}
+
+.margin-right_16 {
+  margin-right: 32rpx;  
+}
+
+/** cell 的小图标 */
+.cell_icon {
+  margin-right: 15px;
+  vertical-align: middle;
+  width:16px; 
+  height: 16px;
+  margin-bottom:4px; 
+}
+
+/** 列表尾解释说明视图 */
+.cells-footer_title {
+  font-size: 13px;
+  color:#8e8e93;  
+  height: 34rpx;
+  line-height: 34rpx;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+/**
+  页面底部按钮区域
+*/
+.add-view {
+  width: 100%;
+  position: fixed;
+  bottom: 10px;
+  height: 84px;
+  border-top: 1rpx solid #e5e5e5;
+}
+
+.add-view_inner {
+  margin-top: 30rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-view_image {
+  width: 20px;
+  height: 20px;
+
+  margin-right: 10px;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
