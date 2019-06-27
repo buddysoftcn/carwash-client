@@ -1,0 +1,5 @@
+/* template/authView.wxss */
+.auth-view_info_allow {
+  color: black;
+  margin-top:40px;
+}

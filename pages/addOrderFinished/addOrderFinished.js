@@ -1,24 +1,18 @@
-// pages/announcementDetail/announcementDetail.js
+// pages/addOrderFinished/addOrderFinished.js
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {   
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    annoucement:null
+  data: {
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      annoucement: getApp().globalData.param
-    })
+
   },
 
   /**

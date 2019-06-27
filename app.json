@@ -1,7 +1,11 @@
 {
-  "pages": [
-    
+  "pages": [  
+    "pages/addOrder/addOrder",
+    "pages/editCar/editCar",  
     "pages/home/home",
+   
+    "pages/addOrderFinished/addOrderFinished",
+    "pages/worktimeList/worktimeList",
     "pages/my/my",
     "pages/index/index",
     "pages/logs/logs",
@@ -10,8 +14,8 @@
     "pages/creditList/creditList",
     "pages/paymentList/paymentList",
     "pages/paymentView/paymentView",
-    "pages/editCar/editCar",
-    "pages/carList/carList"
+   
+    "pages/carList/carList"   
   ],
   "window": {
     "backgroundTextStyle": "light",

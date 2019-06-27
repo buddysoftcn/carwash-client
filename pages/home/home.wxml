@@ -10,9 +10,9 @@
     indicator-active-color="rgba(10,187,8,1)"
     class="swiper-view_swiper"
   >
-    <block wx:for="{{imgUrls}}" wx:key="imgUrl" >
+    <block wx:for="{{announces}}" wx:key="*this" wx:for-item="announce">
       <swiper-item>
-        <image bindtap='onShowAnnouncement' lazy-load='true' mode="aspectFill" data-announcement="{{item}}" src="{{item}}" class="swiper-view" />
+        <image bindtap='onShowAnnouncement' lazy-load='true' mode="aspectFill" data-announcement="{{announce}}" src="{{announce.images[0].url}}" class="swiper-view" />
       </swiper-item>
     </block>
   </swiper>
@@ -27,10 +27,10 @@
   <view class="group-title font-weight_500 font-size_17 font-color_444 margin-left_16">洗车预约</view>
   <view class="weui-flex shop-view_detail">
     <view class="">
-      <view style='margin-bottom:20rpx;' class="font-size_15 margin-left_16"> 预约时间: 08:00 ~ 17:30</view> 
-      <view bindtap='onCallPhone' class="font-size_15 margin-left_16"> 联系电话: 18037994395</view> 
+      <view style='margin-bottom:20rpx;' class="font-size_15 margin-left_16"> 预约时间: {{shop.shopSetting.uiWorkTimeBegin}} ~ {{shop.shopSetting.uiWorkTimeEnd}}</view> 
+      <view bindtap='onCallPhone' class="font-size_15 margin-left_16"> 联系电话: {{shop.shop.phone}}</view> 
     </view>
-    <view class="start-order_view font-size_15 margin-right_16">开始预约</view>
+    <view class="start-order_view font-size_15 margin-right_16" bindtap="onOrder">开始预约</view>
   </view>
 
   <view class="group-title font-weight_500 font-size_17 font-color_444 margin-left_16">店主推荐</view>
@@ -38,21 +38,16 @@
 
 <!-- 商品信息 -->
 <view class="goods-cells">
-  <view class="goods-cell weui-flex" bindtap='onShowGoods'>
-    <image mode="aspectFill" lazy-load="true" class="goods-cell_image" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556099700243&di=48ede8a1e75fe0ba4522f696154ea376&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft229%2F57%2F1308633488%2F409680%2F7cd47085%2F53f940e2Nd0aee585.jpg" />
+  <view wx:for="{{goods}}" wx:key="*this" wx:for-item="goods" class="goods-cell weui-flex" data-goods="{{goods}}" bindtap='onShowGoods'>
+    <image mode="aspectFill" lazy-load="true" class="goods-cell_image" src="{{goods.images[0].url}}" />
     <view class="">
-        <view class="weui-media-box__title">专车专用3D大包围丝圈全包脚垫</view>
-        <view class="font-size_17 font-weight_500 font-color_fa6400">￥299</view>
-        <view class="goods-discount">4.9折</view>
-    </view>
-  </view>
-
-  <view class="goods-cell weui-flex">
-    <image mode="aspectFill" lazy-load="true" class="goods-cell_image" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556099700243&di=48ede8a1e75fe0ba4522f696154ea376&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft229%2F57%2F1308633488%2F409680%2F7cd47085%2F53f940e2Nd0aee585.jpg" />
-    <view class="">
-        <view class="weui-media-box__title">专车专用3D大包围丝圈全包脚垫</view>
-        <view class="font-size_17 font-weight_500 font-color_fa6400">￥299</view>
-        <view class="goods-discount">4.9折</view>
+        <view class="weui-media-box__title">{{goods.name}}</view>
+        <view class="font-size_17 font-weight_500 font-color_fa6400">￥{{goods.price}}</view>
+        <view class="goods-discount">{{goods.discount}}折</view>
     </view>
   </view>
 </view>
+
+<!-- 用户授权提示视图 -->
+<import src="../../template/authView/authView.wxml"/>
+<template is="authView" data="{{showAuthView}}"/>

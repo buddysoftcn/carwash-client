@@ -1,0 +1,50 @@
+/* pages/addOrder/addOrder.wxss */
+.weui-media-box__thumb-fixed {
+  width:32rpx;
+  height:32rpx;
+  vertical-align: middle;
+}
+
+.weui-media-box__hd_in-appmsg-fixed {
+  margin-right:.8em;
+  width:30px;
+  height:60px;
+  line-height:60px;
+  text-align:center;
+}
+
+.add-car-view {
+  color:#F7B500;
+  border: 1rpx solid #F7B500;
+  border-radius: 40rpx;
+  width: 528rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+}
+
+.add-car-view_image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.payment-popup-view {
+  height: 900rpx;
+}
+
+.payment-popup-view_header {
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  border-bottom: 1rpx solid #d8d8d8;
+}
+
+.payment-popup-view_header-btn {
+  width: 60px;
+}
+
+.payment-popup-view_cell {
+  background-color: #efeff4;
+  height: 60px;
+  align-items: center;
+}

@@ -1,0 +1,29 @@
+<!--pages/worktimeList/worktimeList.wxml-->
+<view class="weui-flex">
+  <!-- 今天 -->
+  <view class="date-view">
+    <view class="weui-flex center"><view class="circel-green"></view><view class="font-size_17 font-weight_500">今天</view></view>
+    <view style="text-align: center" class="font-size_14">{{days[0].uiDate}} {{days[0].week}}</view>
+  </view>
+  <view class="date-view_line">
+  </view>
+  <!-- 明天 -->
+  <view class="date-view">
+    <view class="weui-flex center"><view class="font-size_17 font-weight_500 font-color_6d">明天</view></view>
+    <view style="text-align: center" class= "font-size_14 font-color_9b">{{days[1].uiDate}} {{days[1].week}}</view>
+  </view>
+</view>
+
+<!-- 预约列表视图 -->
+<view style='margin-top:0rpx;'>
+  <block wx:for="{{worktimes}}" wx:key="this">
+    <view class="weui-cells__title">{{item.hour}}点</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view wx:for="{{item.worktimes}}" wx:key="this" wx:for-item="worktime" class="weui-cell" data-worktime="{{worktime}}" bindtap='onCell'>                
+          <view class="weui-cell__bd">{{worktime.time}}</view>   
+          <view wx:if="{{null != worktime.order}}" class="weui-cell__ft weui-cell__ft_in-access order-list-cell_value font-size_16"><label style='width:116px;margin-right:20px;' class="font-size_13 font-color_888"></label><label class="font-weight">{{worktime.order.plateNumber}}</label></view>   
+          <view wx:else class="weui-cell__ft order-list-cell_value"><view class="worktime-list_button font-size_14 font-weight_500" data-worktime="{{worktime}}" bindtap="onPayment">预约</view></view>           
+      </view>
+    </view>
+  </block>
+</view>

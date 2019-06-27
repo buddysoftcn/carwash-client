@@ -1,33 +1,35 @@
 <!--pages/editCar/editCar.wxml-->
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-          <view class="weui-label">车牌</view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入完整车牌号码"/>
-      </view>
+<form bindsubmit="onSave">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">车牌</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input name="number" maxlength="7" class="weui-input" placeholder="请输入完整车牌号码"/>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+            <view class="weui-label">车型</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindCarModelChange" range-key="model" value="{{carModelIndex}}" range="{{carModels}}">
+                <view class="weui-select weui-select_in-select-after">{{carModels[carModelIndex].model}}</view>
+            </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">品牌</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input name="desc" class="weui-input" placeholder="如 “大众”"/>
+        </view>
+    </view>
   </view>
 
-  <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-          <view class="weui-label">车型</view>
-      </view>
-      <view class="weui-cell__bd">
-          <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-              <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
-          </picker>
-      </view>
-  </view>
-
-  <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-          <view class="weui-label">品牌</view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="如 “大众”"/>
-      </view>
-  </view>
-</view>
-
-<button style='margin-top:112rpx;' class="margin-right_16 margin-left_16" type="primary" bindtap="onSave">保存信息</button>
+  <button style='margin-top:112rpx;' class="margin-right_16 margin-left_16" type="primary" formType="submit">保存信息</button>
+</form>

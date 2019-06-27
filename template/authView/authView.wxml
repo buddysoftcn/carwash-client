@@ -1,0 +1,13 @@
+<!--template/authView.wxml-->
+<!-- 授权提示视图 -->
+<template name="authView">
+  <van-popup show="{{ showAuthView }}" bind:close="onClose" custom-class="auth-view" custom-style="top:300px;">  
+    <view class="popup-view_title">需要您的授权</view>
+    <view class="line auth-view_line"></view>
+    <view class="popup-view_info auth-view_info">使用新的身份使用小程序提供的服务</view>
+    <view style='margin-top:3px;' class="popup-view_info auth-view_info">之前，我们需要您的头像、昵称等基</view>
+    <view style='margin-top:3px;' class="popup-view_info auth-view_info">本信息。请在稍后的提示框中点</view>
+    <view style='margin-top:3px;' class="popup-view_info auth-view_info">击“允许”</view>
+    <button class="auth-view_btn weui-btn popup-view-button font-weight" type="primary" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">我知道了</button>
+  </van-popup>
+</template>

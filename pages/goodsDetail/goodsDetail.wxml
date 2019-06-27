@@ -8,13 +8,13 @@
   indicator-color="rgba(255,255,255,1)"
   indicator-active-color="rgba(10,187,8,1)"
 >
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{goods.images}}" wx:ksy="*this">
     <swiper-item>
-      <image lazy-load='true' mode="aspectFill" src="{{item}}" class="swiper-view" />
+      <image lazy-load='true' mode="aspectFill" src="{{item.url}}" class="swiper-view" />
     </swiper-item>
   </block>
 </swiper>
 
-<view class="title margin-left_16 margin-right_16 font-weight_500 font-color_red">￥ 299</view>
+<view class="title margin-left_16 margin-right_16 font-weight_500 font-color_red">￥ {{goods.price}}</view>
 <view class="margin-top_16 margin-left_16 font-color_999 font-size_13">商品介绍</view>
-<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">五座透气四季通用专用坐垫</view>
+<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">{{goods.name}}</view>

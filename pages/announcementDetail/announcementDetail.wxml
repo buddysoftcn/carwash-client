@@ -8,13 +8,13 @@
   indicator-color="rgba(255,255,255,1)"
   indicator-active-color="rgba(10,187,8,1)"
 >
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{annoucement.images}}">
     <swiper-item>
-      <image lazy-load='true' mode="aspectFill" src="{{item}}" class="swiper-view" />
+      <image lazy-load='true' mode="aspectFill" src="{{item.url}}" class="swiper-view" />
     </swiper-item>
   </block>
 </swiper>
 
-<view class="title margin-left_16 font-weight_500">年前洗车服务通知</view>
+<view class="title margin-left_16 font-weight_500">{{annoucement.title}}</view>
 <view class="margin-top_16 margin-left_16 margin-right_16 font-color_999 font-size_13">通知详情</view>
-<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">自下周一(1月21起)，本中心洗车服务一律现金结算，五座及以下轿车25元/次，suv及七座商务30元/次，1月28日起执行节日价格，会员/非会员:50/60(五座及以下轿车，80/100(suv及七座商务)。另外请持有本中心会员卡客户在1月31日前务必将卡消费完毕，过期无效!!!谢谢理解与支持!!!🙏🙏🙏</view>
+<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">{{annoucement.desc}}</view>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "确认预约",
   "usingComponents": {
     "van-popup": "../../lib/dist/popup/index"
   }

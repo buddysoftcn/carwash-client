@@ -1,24 +1,20 @@
-// pages/announcementDetail/announcementDetail.js
+// pages/addOrder/addOrder.js
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {   
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    annoucement:null
+  data: {
+    datetime:'3月15日 08:20',
+    showPopupView:true,
+    payTypes:[{'name':'豫CPU220','value':1,'checked':true,'desc':'马自达'},]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      annoucement: getApp().globalData.param
-    })
+
   },
 
   /**
@@ -63,10 +59,21 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onAddCar:function() {
+    wx.navigateTo({
+      url: '../editCar/editCar',
+    })
+  },
 
+  onSave:function() {
+    wx.navigateTo({
+      url: '../addOrderFinished/addOrderFinished',
+    })
+  },
+
+  onClose:function() {
+    this.setData({
+      showPopupView:false
+    })
   }
 })

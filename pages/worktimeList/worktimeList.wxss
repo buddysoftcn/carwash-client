@@ -1,0 +1,47 @@
+/* pages/worktimeList/worktimeList.wxss */
+.circel-green {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background-color: #2ECC71;
+  margin-right: 16rpx;
+}
+
+.date-view {
+  height: 120rpx;
+  flex-grow: 1;
+  background-color:white;
+}
+
+.date-view_line {
+  width: 2rpx;
+  height: 120rpx;
+  background-color: #f5f5f5;
+}
+
+.date-view_current {
+  color: black;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.font-color_6d {
+  color: #6D7278;
+}
+
+.font-color_9b {
+  color: #9B9B9B;
+}
+
+.worktime-list_button {
+  width: 140rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  border-radius: 30rpx;
+  background-color: #2ECC71;
+  color:white;
+  text-align: center;
+}

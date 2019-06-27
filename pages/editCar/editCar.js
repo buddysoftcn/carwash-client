@@ -1,18 +1,23 @@
 // pages/editCar/editCar.js
+let shopModel = require('../../model/shop.js')
+let request = require('../../operation/operation.js')
+let mode = 'create'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    carModels:[],
+    carModelIndex:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.initCarModelView()
   },
 
   /**
@@ -57,16 +62,53 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onSave:function(event) {
+    let number = event.detail.value.number,desc = event.detail.value.desc
+    if (0 == number.length || 7 != number.length) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入完整车牌号码',
+        showCancel:false
+      })
+    }else {
+      wx.showLoading({
+        title: '请稍候',
+        mask:true
+      })
 
+      if ('create' == mode) {
+        request.postRequest('/plates', { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc },true)
+        .then(data => {
+          wx.hideLoading()
+          console.log(data)
+        }).catch(e => {
+          wx.hideLoading()
+          wx.showToast({
+            title: e.msg,
+            icon:'none'
+          })
+        })
+      }
+      
+    }
+    
+    // wx.navigateBack({
+    //   delta: 1,
+    // })
   },
 
-  onSave:function() {
-    wx.navigateBack({
-      delta: 1,
+  bindCarModelChange:function(event) {    
+    this.setData({
+      carModelIndex:event.detail.value
+    })
+  },
+
+  initCarModelView:function() {
+    let carModels = shopModel.getShopInfo().carModels
+    console.log(carModels)
+
+    this.setData({
+      carModels:carModels
     })
   }
 })

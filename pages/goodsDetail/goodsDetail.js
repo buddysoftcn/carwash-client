@@ -5,12 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556099700243&di=48ede8a1e75fe0ba4522f696154ea376&imgtype=0&src=http%3A%2F%2Fimg12.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft229%2F57%2F1308633488%2F409680%2F7cd47085%2F53f940e2Nd0aee585.jpg',
-      'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-      'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-      'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
-    ],
+    goods:{},
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -21,7 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      goods: getApp().globalData.param
+    }) 
   },
 
   /**
@@ -67,9 +64,10 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
+  * 用户点击右上角分享
+  */
   onShareAppMessage: function () {
 
   }
+
 })

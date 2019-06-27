@@ -1,0 +1,64 @@
+<!--pages/addOrder/addOrder.wxml-->
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_appmsg flex-center" hover-class="">               
+      <view bindtap="onAddCar" class="add-car-view"> <image class="add-car-view_image" src="../../images/add.png"/> <label class="font-size_17" style="margin-left:20rpx;">添加车牌</label></view>        
+    </view>
+
+    <view class="weui-media-box weui-media-box_appmsg weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg-fixed">
+            <image class="weui-media-box__thumb-fixed" src="../../images/car.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg weui-cell__ft_in-access">
+            <view class="weui-media-box__title">豫CPU220</view>
+            <view class="weui-media-box__desc">马自达</view>
+        </view>
+    </view>
+    <view class="weui-media-box weui-media-box_appmsg" hover-class="">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg-fixed">
+            <image class="weui-media-box__thumb-fixed" src="../../images/time.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{datetime}}</view>
+            <view class="weui-media-box__desc"></view>
+        </view>
+    </view>
+  </view>
+</view>
+
+<button style='margin-top:112rpx;' class="margin-right_16 margin-left_16" type="primary" bindtap="onSave">确认预约</button>
+
+<!-- 车牌选择视图 -->
+<van-popup
+  show="{{ showPopupView }}"
+  position="bottom"  
+  bind:close="onClose"
+  custom-class="payment-popup-view"
+  custom-style="background-color:#efeff4;"
+>
+  <view class="weui-flex payment-popup-view_header">
+    <view style='color:#6D7278;margin-left:14px;' class="payment-popup-view_header-btn" bindtap='onClose'>取消</view>
+    <view>车牌号码</view>
+    <view style='margin-right:14px;' class="payment-popup-view_header-btn"></view>
+  </view>
+  
+  <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label payment-popup-view_cell" wx:for="{{payTypes}}" wx:key="value">
+              <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" type="circle" size="16" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success" type="success" size="16" wx:if="{{item.checked}}"></icon>
+              </view>
+              <view class="weui-cell__bd">
+                <view class="font-size_17">{{item.name}}</view>
+                <view class="font-size_14 font-color_9b">{{item.desc}}</view>
+              </view>
+              <view class="weui-cell__ft font-color_yellow font-size_12">已绑定会员卡</view>
+              
+          </label>
+      </checkbox-group>           
+  </view>
+
+</van-popup>

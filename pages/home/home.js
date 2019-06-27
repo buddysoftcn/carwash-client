@@ -1,26 +1,37 @@
 // pages/home/home.js
+let util = require('../../utils/util.js')
+let authViewTemplate = require('../../template/authView/authView.js')
+let getShopInfoOperation = require('../../operation/getShopInfo.js')
+let shopModel = require('../../model/shop.js')
+let userModel = require('../../model/user.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      'https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640',
-      'https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640',
-      'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
-    ],
+    announces:[],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
+    goods:null,
+    shop:null,
+
+    showAuthView: false  // 是否显示授权提示视图
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let shop = shopModel.getShopInfo()
+    if (shop) {
+      this.initView(shop)
+    }
 
+    this.getShopInfo()
   },
 
   /**
@@ -72,31 +83,106 @@ Page({
 
   },
 
+  /**
+   * 点击开始预约按钮事件
+   */
+  onOrder:function() {
+    let role = userModel.getRole()
+
+    if (userModel.ROLE_NO_LOGIN == role.role){
+      authViewTemplate.showView(this, true)
+    }else if (userModel.ROLE_NORMAL == role.role) {
+      wx.navigateTo({
+        url: '../worktimeList/worktimeList',
+      })
+    }
+  },
+
   onCallPhone:function() {
     wx.makePhoneCall({
-      phoneNumber:'18037994395'
+      phoneNumber:this.data.shop.shop.phone
     })
   },
 
-  onShowAnnouncement:function(e) {
-    console.log(e)
+  onShowAnnouncement:function(event) {
+    getApp().globalData.param = event.currentTarget.dataset.announcement
     wx.navigateTo({
       url: '../announcementDetail/announcementDetail',
     })
   },
 
-  onShowGoods:function() {
+  onShowGoods:function(event) {
+    getApp().globalData.param = event.currentTarget.dataset.goods
     wx.navigateTo({
       url: '../goodsDetail/goodsDetail'    
     })
   },
   
+  /**
+   * 显示地图导航界面
+   */
   onShowMap:function () {
+    let location = this.data.shop.shop.location.split(',')
+    
     wx.openLocation({
-      latitude: 34.629964,//要去的纬度-地址
-      longitude: 112.446711,//要去的经度-地址
-      name: "百邦汽车美容中心",
-      address: '洛龙区太康路王城大道交叉口东100米路南'
+      longitude: parseFloat(location[0]),//要去的经度-地址
+      latitude: parseFloat(location[1]),//要去的纬度-地址      
+      name: this.data.shop.shop.name,
+      address: this.data.shop.shop.address
     })
-  }
+  },
+
+  bindGetUserInfo: function (event) {
+    this.setData({
+      showAuthView: false
+    })
+
+    getApp().login(event.detail, function (userInfo, message) {
+      if (null != userInfo) {
+        userModel.setCurrentUser(userInfo)
+        let role = userModel.getRole()
+
+        if (userModel.ROLE_NORMAL == role.role) {
+          wx.navigateTo({
+            url: '../worktimeList/worktimeList',
+          })
+        } if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+          wx.showModal({
+            title: '提示',
+            content: '请登录店铺端小程序',
+            showCancel:false
+          })
+        }
+      }
+    })
+  },
+
+
+  getShopInfo:function() {
+    let that = this
+
+    getShopInfoOperation.getShopInfo()
+    .then(data => {
+      that.initView(data)
+    }).catch(e => {
+
+    })
+  },
+
+  initView:function(shop){
+    wx.setNavigationBarTitle({
+      title: shop.shop.name,
+    })
+
+    shop.shopSetting.uiWorkTimeBegin = util.formatTime(shop.shopSetting.workTimeBegin)
+    shop.shopSetting.uiWorkTimeEnd = util.formatTime(shop.shopSetting.workTimeEnd)
+    this.setData({
+      shop:shop,
+      announces:shop.announces,
+      goods:shop.items
+    })
+  },
+
+
+
 })

@@ -1,0 +1,18 @@
+<!--pages/addOrderFinished/addOrderFinished.wxml-->
+<view class="page">
+  <view class="weui-msg">
+      <view class="weui-msg__icon-area">
+          <icon type="success" size="93"></icon>
+      </view>
+      <view class="weui-msg__text-area">
+          <view class="weui-msg__title">预约成功</view>
+          <view class="weui-msg__desc">TP202车主您好，您已成功预约1月15日08:00的洗车服务，请准时到达。</view>
+      </view>
+      <view class="weui-msg__opr-area">
+          <view class="weui-btn-area">
+              <button class="weui-btn" type="primary" bindtap='onBack'>确定</button>              
+              <button class="weui-btn" plain="true" type="primary" bindtap='onShowOrderDetail'>查看订单</button>              
+          </view>
+      </view>      
+  </view>
+</view>
