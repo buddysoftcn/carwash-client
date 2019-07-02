@@ -6,7 +6,7 @@
       </view>
       <view class="weui-msg__text-area">
           <view class="weui-msg__title">预约成功</view>
-          <view class="weui-msg__desc">TP202车主您好，您已成功预约1月15日08:00的洗车服务，请准时到达。</view>
+          <view class="weui-msg__desc">{{order.plateNumber}}车主您好，您已成功预约1月15日08:00的洗车服务，请准时到达。</view>
       </view>
       <view class="weui-msg__opr-area">
           <view class="weui-btn-area">

@@ -1,12 +1,15 @@
 //app.js
 let buddysoft = require('/buddysoft/buddysoft.js')
 let request = require('/operation/operation.js')
+let notificationCenter = require('/utils/notification.js');
 
 App({
   buddysoft: null,
+  notificationCenter: null,
 
   onLaunch: function () {
     this.buddysoft = buddysoft.buddysoftShop
+    this.notificationCenter = notificationCenter.center()
   },
 
   // 登录请求

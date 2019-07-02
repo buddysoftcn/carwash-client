@@ -1,6 +1,7 @@
 // pages/worktimeList/worktimeList.js
 let util = require('../../utils/util.js')
 let shopModel = require('../../model/shop.js')
+let request = require('../../operation/operation.js')
 let worktimesMap = null // 所有工作时间放入字典中
 let worktimes = null    // 按小时将工作时间进行分组 
 let currentDate = null
@@ -30,10 +31,6 @@ Page({
 
     this.initDaysView()
     this.initWorktimeList()
-
-    this.setData({
-      worktimes:worktimes
-    })
   },
 
   /**
@@ -114,9 +111,8 @@ Page({
 
   initWorktimeList: function () {
     this.initWorktimesMap()
-    this.initWorktimes()
-    console.log(worktimes)
-    // this.getOrders()
+    this.initWorktimes()    
+    this.getOrders()
   },
 
   initWorktimesMap: function () {
@@ -182,6 +178,44 @@ Page({
         }
       }
     }
+  },
+
+  getOrders:function() {
+    let that = this
+
+    wx.showLoading({
+      title: '请稍候',
+      mask: true
+    })
+
+    request.getRequest('/orders?category=onedayappoints&type=0&date=' + currentDate,null,true)
+    .then(data => {
+      wx.hideLoading()
+      that.renderWorkTimeList(data.items)
+    }).catch(e => {
+      wx.hideLoading()
+    })
+  },
+
+  renderWorkTimeList: function (orders) {
+    wx.stopPullDownRefresh()
+    
+    if (orders) {
+      let worktime = null
+
+      for (let index = 0, size = orders.length; index < size; index++) {
+        worktime = worktimesMap.get(orders[index].date + ' ' + orders[index].time)
+        if (worktime) {
+          if ('canceled' != orders[index].state) {
+            worktime.order = orders[index]
+          }
+        }
+      }
+    }
+
+    this.setData({
+      worktimes: worktimes
+    })
   },
 
   makeNextWorktime: function (datetime, washMinutes) {

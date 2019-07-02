@@ -5,14 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    order:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      order: getApp().globalData.param
+    })
   },
 
   /**
@@ -57,10 +59,17 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onBack:function() {
+    wx.switchTab({
+      url: '../home/home',
+    })
+  },
 
+  onShowOrderDetail:function() {
+    getApp().globalData.param = this.data.order
+
+    wx.navigateTo({
+      url: '../orderDetail/orderDetail',
+    })
   }
 })

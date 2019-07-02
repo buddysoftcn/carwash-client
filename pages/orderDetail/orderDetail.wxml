@@ -1,0 +1,32 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class="weui-form-preview">
+    <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">洗车费用</view>
+            <view class="weui-form-preview__value_in-hd">¥ {{order.amount/100}}</view>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">洗车日期</view>
+            <view class="weui-form-preview__value">{{order.uiDate}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">洗车时间</view>
+            <view class="weui-form-preview__value">{{order.uiTime}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">预约车辆</view>
+            <view class="weui-form-preview__value">{{order.plateNumber}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">预约时间</view>
+            <view class="weui-form-preview__value">{{order.date}} {{order.time}}</view>
+        </view>
+    </view>
+    <view class="weui-form-preview__ft">
+        <view wx:if="{{'created' == order.state}}" class="weui-form-preview__btn weui-form-preview__btn_primary order-btn font-size_17" hover-class="weui-form-preview__btn_active" bindtap="onCancelOrder">取消订单</view>
+        <view wx:if="{{'canceled' == order.state}}" class="weui-form-preview__btn weui-form-preview__btn_primary order-btn font-size_17" hover-class="weui-form-preview__btn_active">订单已取消</view>
+        <view wx:if="{{'finished' == order.state}}" class="weui-form-preview__btn weui-form-preview__btn_primary order-btn font-size_17" hover-class="weui-form-preview__btn_active">已结账</view>
+    </view>
+</view>

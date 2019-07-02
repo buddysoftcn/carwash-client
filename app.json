@@ -1,21 +1,19 @@
 {
-  "pages": [  
-    "pages/addOrder/addOrder",
-    "pages/editCar/editCar",  
+  "pages": [
     "pages/home/home",
-   
-    "pages/addOrderFinished/addOrderFinished",
     "pages/worktimeList/worktimeList",
+    "pages/addOrder/addOrder",
+    "pages/editCar/editCar",
+    "pages/addOrderFinished/addOrderFinished",
     "pages/my/my",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/announcementDetail/announcementDetail",
     "pages/goodsDetail/goodsDetail",
     "pages/creditList/creditList",
     "pages/paymentList/paymentList",
     "pages/paymentView/paymentView",
-   
-    "pages/carList/carList"   
+    "pages/carList/carList",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,9 +1,12 @@
 // pages/home/home.js
 let util = require('../../utils/util.js')
+let carWash = require('../../utils/carWash.js')
 let authViewTemplate = require('../../template/authView/authView.js')
 let getShopInfoOperation = require('../../operation/getShopInfo.js')
+let request = require('../../operation/operation.js')
 let shopModel = require('../../model/shop.js')
 let userModel = require('../../model/user.js')
+let orderModel = require('../../model/order.js')
 
 Page({
 
@@ -18,6 +21,7 @@ Page({
     duration: 1000,
     goods:null,
     shop:null,
+    order:null, // 用户当前自己的订单
 
     showAuthView: false  // 是否显示授权提示视图
   },
@@ -30,8 +34,15 @@ Page({
     if (shop) {
       this.initView(shop)
     }
+    let order = orderModel.getCurrentOrder()
+    if (null != order) {
+      this.initOrderView(order)
+    }
 
     this.getShopInfo()
+    this.getUnFinishedOrder()
+
+    getApp().notificationCenter.register(carWash.UPDATE_ORDER_MESSAGE, this, "getUnFinishedOrder");
   },
 
   /**
@@ -59,7 +70,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    getApp().notificationCenter.remove(carWash.UPDATE_ORDER_MESSAGE, this)
   },
 
   /**
@@ -132,6 +143,17 @@ Page({
     })
   },
 
+  /**
+   * 查看用户当前订单详情
+   */
+  onShowOrderDetail:function() {
+    getApp().globalData.param = this.data.order
+
+    wx.navigateTo({
+      url: '../orderDetail/orderDetail',
+    })
+  },
+
   bindGetUserInfo: function (event) {
     this.setData({
       showAuthView: false
@@ -169,6 +191,22 @@ Page({
     })
   },
 
+  getUnFinishedOrder:function() {
+    let role = userModel.getRole(),that = this
+    if (userModel.ROLE_NORMAL == role.role) {
+      request.getRequest('/orders?type=0&category=client_orders&state=created',null,true)
+      .then(data => {
+        if (0 < data.items.length) {
+          orderModel.setCurrentOrder(data.items[0])          
+          that.initOrderView(data.items[0])
+        }else {
+          orderModel.removeCurrentOrder()
+          that.initOrderView(null)
+        }               
+      })
+    }
+  },
+
   initView:function(shop){
     wx.setNavigationBarTitle({
       title: shop.shop.name,
@@ -183,6 +221,25 @@ Page({
     })
   },
 
+  initOrderView:function(order) {
+    if (order) {
+      let uiDatetime = null, today = util.today(), tomorrow = util.tomorrow()
 
+      if (today == order.date) {
+        uiDatetime = '今天'
+      } else if (tomorrow == order.date) {
+        uiDatetime = '明天'
+      } else {
+        uiDatetime = util.formatDate(order.date)
+      }
+
+      uiDatetime = uiDatetime + ' ' + util.formatTime(order.time) + ' '
+      order.uiDatetime = uiDatetime
+    }
+    
+    this.setData({
+      order:order
+    })
+  }
 
 })

@@ -24,7 +24,7 @@
 
 <!-- 店铺信息 -->
 <view class="shop-view">
-  <view class="group-title font-weight_500 font-size_17 font-color_444 margin-left_16">洗车预约</view>
+  <view class="weui-flex"><view class="group-title font-weight_500 font-size_17 font-color_444 margin-left_16">洗车预约</view><view bindtap="onShowOrderDetail" wx:if="{{null != order}}" class="group-title font-size_14 font-weight_500 order-info margin-left_16">您在{{order.uiDatetime}}有预约 立即查看</view></view>
   <view class="weui-flex shop-view_detail">
     <view class="">
       <view style='margin-bottom:20rpx;' class="font-size_15 margin-left_16"> 预约时间: {{shop.shopSetting.uiWorkTimeBegin}} ~ {{shop.shopSetting.uiWorkTimeEnd}}</view> 

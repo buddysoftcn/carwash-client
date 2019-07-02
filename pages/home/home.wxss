@@ -30,6 +30,10 @@
   line-height: 80rpx;
 }
 
+.order-info {
+  color:#0474fe;
+}
+
 .shop-view {
   background-color: white;
 }

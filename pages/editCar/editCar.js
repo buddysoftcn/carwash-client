@@ -1,6 +1,7 @@
 // pages/editCar/editCar.js
 let shopModel = require('../../model/shop.js')
 let request = require('../../operation/operation.js')
+let carWash = require('../../utils/carWash.js')
 let mode = 'create'
 
 Page({
@@ -80,7 +81,11 @@ Page({
         request.postRequest('/plates', { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc },true)
         .then(data => {
           wx.hideLoading()
-          console.log(data)
+          
+          getApp().notificationCenter.post(carWash.UPDATE_PLATE_MESSAGE, {})
+          wx.navigateBack({
+            delta: 1,
+          })
         }).catch(e => {
           wx.hideLoading()
           wx.showToast({
@@ -92,9 +97,6 @@ Page({
       
     }
     
-    // wx.navigateBack({
-    //   delta: 1,
-    // })
   },
 
   bindCarModelChange:function(event) {    
