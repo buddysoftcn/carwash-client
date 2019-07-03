@@ -1,19 +1,10 @@
 <!--pages/carList/carList.wxml-->
-<view class="cell">
+<view wx:for="{{plates}}" wx:key="*this" wx:for-item="plate" class="cell">
   <view class="weui-flex cell-content">
-    <view class="font-size_17">豫CHP516</view> <van-icon bind:click="onShowMore" name="ellipsis" />
+    <view class="font-size_17">{{plate.number}}</view> <van-icon data-plate="{{plate}}" bind:click="onShowMore" name="ellipsis" />
   </view>
   <view class="weui-flex cell-content">
-    <view class="font-size_14 font-color_666">轿车</view> <view class="font-color_yellow font-size_12">已绑定到会员卡</view>
-  </view>
-</view>
-
-<view class="cell">
-  <view class="weui-flex cell-content">
-    <view class="font-size_17">豫CHP516</view> <van-icon name="ellipsis" />
-  </view>
-  <view class="weui-flex cell-content">
-    <view class="font-size_14 font-color_666">轿车</view> <view class="font-color_yellow font-size_12"></view>
+    <view class="font-size_14 font-color_666">{{plate.carModel.model}} {{plate.desc}}</view> <view wx:if="{{1 == plate.binded}}" class="font-color_yellow font-size_12">已绑定到会员卡</view>
   </view>
 </view>
 
@@ -25,7 +16,7 @@
 </view>
 
 <van-action-sheet
-  title="豫CHP516"
+  title="{{currentPlate.number}}"
   show="{{ show }}"
   cancel-text="取消"
   actions="{{ actions }}"

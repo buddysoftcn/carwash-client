@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    plate:null,
     carModels:[],
     carModelIndex:0
   },
@@ -19,6 +20,11 @@ Page({
    */
   onLoad: function (options) {
     this.initCarModelView()
+
+    if (options.mode) {
+      mode = options.mode
+      this.initPlate()
+    }    
   },
 
   /**
@@ -64,6 +70,7 @@ Page({
   },
 
   onSave:function(event) {
+    let that = this
     let number = event.detail.value.number,desc = event.detail.value.desc
     if (0 == number.length || 7 != number.length) {
       wx.showModal({
@@ -80,21 +87,18 @@ Page({
       if ('create' == mode) {
         request.postRequest('/plates', { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc },true)
         .then(data => {
-          wx.hideLoading()
-          
-          getApp().notificationCenter.post(carWash.UPDATE_PLATE_MESSAGE, {})
-          wx.navigateBack({
-            delta: 1,
-          })
+          that.back()
         }).catch(e => {
-          wx.hideLoading()
-          wx.showToast({
-            title: e.msg,
-            icon:'none'
-          })
+          that.showMessage(e)
         })
-      }
-      
+      }else if ('edit' == mode) {
+        request.putRequest('/plates/' + this.data.plate.sid, { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc }, true)
+          .then(data => {
+            that.back()
+          }).catch(e => {
+            that.showMessage(e)
+          })
+      }      
     }
     
   },
@@ -111,6 +115,36 @@ Page({
 
     this.setData({
       carModels:carModels
+    })
+  },
+
+  initPlate:function() {
+    let plate = getApp().globalData.param, carModelIndex = 0
+    for (let size = this.data.carModels.length; carModelIndex < size; carModelIndex++) {
+      if (plate.carModelSid == this.data.carModels[carModelIndex].sid) {
+        break
+      }
+    }
+    this.setData({
+      plate:plate,
+      carModelIndex: carModelIndex
+    })
+  },
+
+  back:function() {
+    wx.hideLoading()
+
+    getApp().notificationCenter.post(carWash.UPDATE_PLATE_MESSAGE, {})
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+
+  showMessage:function(e) {
+    wx.hideLoading()
+    wx.showToast({
+      title: e.msg,
+      icon: 'none'
     })
   }
 })

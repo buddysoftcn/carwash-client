@@ -6,7 +6,7 @@
             <view class="weui-label">车牌</view>
         </view>
         <view class="weui-cell__bd">
-            <input name="number" maxlength="7" class="weui-input" placeholder="请输入完整车牌号码"/>
+            <input name="number" maxlength="7" class="weui-input" placeholder="请输入完整车牌号码" value="{{plate.number}}"/>
         </view>
     </view>
 
@@ -26,7 +26,7 @@
             <view class="weui-label">品牌</view>
         </view>
         <view class="weui-cell__bd">
-            <input name="desc" class="weui-input" placeholder="如 “大众”"/>
+            <input name="desc" class="weui-input" placeholder="如 “大众”" value="{{plate.desc}}"/>
         </view>
     </view>
   </view>

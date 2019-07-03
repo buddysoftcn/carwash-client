@@ -15,6 +15,14 @@
   margin: 32rpx;
 }
 
+.action-sheet_disable {
+  color:#B2B2B2;
+}
+
+.action-sheet_normal {
+  color: black;
+}
+
 .action-sheet_del {
   color: #e02020;
 }

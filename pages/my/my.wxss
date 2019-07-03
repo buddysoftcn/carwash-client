@@ -14,14 +14,20 @@
     height:292rpx;
 }
 
-.card-view_backgound-image {
-  width: 100%;
-  height: 292rpx;
+.card-view_shop-name {
+  margin-top:-60rpx;
+  margin-bottom: 20rpx;  
+}
+
+.card-view_content-login {
+  display: flex;
+  flex-direction: column;
 }
 
 .card-view_content {
   position: absolute;
   align-items: center;
+  justify-content: center;
   height: 292rpx;
   width: 100%;
   z-index: 1;

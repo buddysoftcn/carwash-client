@@ -1,58 +1,71 @@
 <!--pages/my/my.wxml-->
 <view class="card-view margin-top_16">
   <image mode="aspectFit" src="../../images/card.png" class=" card-view_backgound-image"></image>
+
+  <view wx:if="{{false == vip}}" class="card-view_content card-view_content-login">
+    <view class="font-size_13 font-color_vip card-view_shop-name">{{shop.name}}</view>
+    <view class="card-view_content-add-card font-size_17" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">请登录</view>
+  </view>
+
   <view class="card-view_content weui-flex">
     <!-- 头像、角色、昵称视图 -->
-    <view class="weui-flex__item" bindtap='onSwitchRole'>
-      <view style='display: flex;flex-direction: column;align-items: center;'>
-      <image class="card-view_content-oval {{true==vip ? 'card-view_content-oval-vip' : 'card-view_content-oval-normal'}}" src="../../images/oval.png"/>
-      <view class="card-view_content-role {{vip ? 'font-color_vip' : 'font-color_white'}}">普通用户</view>
-      <view class="font-size_14 font-weight_500 font-color_white">天蓬</view>
+    <block wx:if="{{true == vip}}">
+      <view  class="weui-flex__item" bindtap='onSwitchRole'>
+        <view style='display: flex;flex-direction: column;align-items: center;'>
+        <image class="card-view_content-oval {{true==vip ? 'card-view_content-oval-vip' : 'card-view_content-oval-normal'}}" src="{{user.user.avatarUrl}}"/>
+        <view class="card-view_content-role {{vip ? 'font-color_vip' : 'font-color_white'}}">店铺会员</view>
+        <view class="font-size_14 font-weight_500 font-color_white">{{user.user.nickName}}</view>
+        </view>
       </view>
-    </view>
-    <!-- 店名、余额、有效期视图 -->
-    <view class="">
-      <view wx:if="{{false == vip}}" class="card-view_content-add-card font-size_17 ">+ 领取会员卡</view>
-      <view style='display: flex;flex-direction: column;align-items: center;' wx:else>
-        <view class="font-size_13 font-color_vip">百邦汽车美容中心·会员卡</view>
-        <view style='margin-top:40rpx;margin-bottom:40rpx;' class="weui-flex"><view style='height:48rpx;line-height:48rpx;' class="font-size_14 font-color_white">卡内余额：</view><view style='font-size:48rpx;height:48rpx;line-height:48rpx;' class="font-weight_500 font-color_white">￥300</view></view>
-        <view style='color:#C7C7CC;' class="font-size_13">（有效期至 2022.3.15）</view>
+      <!-- 店名、余额、有效期视图 -->
+      <view class="">     
+        <view style='display: flex;flex-direction: column;align-items: left;'>
+          <view class="font-size_13 font-color_vip">会员卡号 · {{user.member.serial}}</view>
+          <view style='margin-top:40rpx;margin-bottom:40rpx;' class="weui-flex"><view style='height:48rpx;line-height:48rpx;' class="font-size_14 font-color_white">卡内余额：</view><view style='font-size:48rpx;height:48rpx;line-height:48rpx;' class="font-weight_500 font-color_white">￥{{user.member.balance}}</view></view>
+          <view wx:if="{{0 != user.member.balance}}" style='color:#C7C7CC;' class="font-size_13">（有效期至 2022.3.15）</view>
+          <view wx:else style='color:#C7C7CC;' class="font-size_13"> 充值请咨询工作人员 </view>
+        </view>
       </view>
-    </view>
 
-    <view style='height:100%;' class="weui-flex__item">
-      <view bindtap='onPaymentView' wx:if="{{true == vip}}" class="card-view_content-payment font-size_13 font-color_white">续费</view>
-    </view>
+      <view style='height:100%;' class="weui-flex__item">
+        <!-- <view bindtap='onPaymentView' wx:if="{{true == vip}}" class="card-view_content-payment font-size_13 font-color_white">续费</view> -->
+      </view>
+    </block>
+  </view>  
+</view>
+
+<block wx:if="{{true == vip}}">
+  <view class="weui-cells">
+    <navigator url="../creditList/creditList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+            <image mode="aspectFit" src="../../images/xinyong.png" class="cell_icon"></image>
+        </view>
+        <view class="weui-cell__bd">预约信用</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">信用极好</view>
+    </navigator>  
   </view>
-</view>
 
+  <view class="weui-cells">
+    <navigator url="../carList/carList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+            <image mode="aspectFit" src="../../images/car.png" class="cell_icon"></image>
+        </view>
+        <view class="weui-cell__bd">车牌管理</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>  
+  </view>
 
-<view class="weui-cells">
-  <navigator url="../creditList/creditList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class="weui-cell__hd">
-          <image mode="aspectFit" src="../../images/xinyong.png" class="cell_icon"></image>
-      </view>
-      <view class="weui-cell__bd">预约信用</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access">信用极好</view>
-  </navigator>  
-</view>
+  <view class="weui-cells">
+    <navigator url="../paymentList/paymentList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+            <image mode="aspectFit" src="../../images/money.png" class="cell_icon"></image>
+        </view>
+        <view class="weui-cell__bd">消费记录</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>  
+  </view>
+</block>
 
-<view class="weui-cells">
-  <navigator url="../carList/carList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class="weui-cell__hd">
-          <image mode="aspectFit" src="../../images/car.png" class="cell_icon"></image>
-      </view>
-      <view class="weui-cell__bd">车牌管理</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>  
-</view>
-
-<view class="weui-cells">
-  <navigator url="../paymentList/paymentList" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-      <view class="weui-cell__hd">
-          <image mode="aspectFit" src="../../images/money.png" class="cell_icon"></image>
-      </view>
-      <view class="weui-cell__bd">消费记录</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-  </navigator>  
-</view>
+<!-- 用户授权提示视图 -->
+<import src="../../template/authView/authView.wxml"/>
+<template is="authView" data="{{showAuthView}}"/>

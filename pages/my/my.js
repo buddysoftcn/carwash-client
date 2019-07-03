@@ -1,18 +1,29 @@
 // pages/my/my.js
+let userModel = require('../../model/user.js')
+let shopModel = require('../../model/shop.js')
+
+let currentUser = null
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    vip:true
+    vip:false,
+    shop:null,
+    user:null,
+    showAuthView: false  // 是否显示授权提示视图
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.initShopView()
 
+    currentUser = userModel.getCurrentUser()
+    this.initUserView()
   },
 
   /**
@@ -26,7 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.checkUser()
   },
 
   /**
@@ -57,25 +68,69 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   onPaymentView:function() {
     wx.navigateTo({
       url: '../paymentView/paymentView'     
     })
   },
 
-  onSwitchRole:function() {
-    let role = this.data.vip
-    role = !role
+  bindGetUserInfo: function (event) {    
+    let that = this
 
     this.setData({
-      vip:role
+      showAuthView: false
     })
+
+    if (event.detail.rawData) { // 允许授权
+      getApp().login(event.detail, function (userInfo, message) {
+        if (null != userInfo) {
+          userModel.setCurrentUser(userInfo)
+          currentUser = userInfo
+          that.checkUser()
+          that.initUserView()
+        }
+      })
+    }   
+  },
+
+  checkUser: function () {
+    let role = userModel.getRole()
+
+    if (userModel.ROLE_NO_LOGIN == role.role) {
+      this.setData({
+        showAuthView:true,
+        vip:false
+      })
+    } else if (userModel.ROLE_NORMAL == role.role) {
+      this.setData({        
+        vip:true        
+      })
+    } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+      wx.showModal({
+        title: '提示',
+        content: '请登录店铺端小程序',
+        showCancel: false
+      })
+
+      this.setData({
+        vip: true
+      })
+    }
+  },
+
+  initShopView:function() {
+    let shop = shopModel.getShopInfo().shop
+    this.setData({
+      shop:shop
+    })
+  },
+
+  initUserView:function() {
+    console.log(currentUser)
+    if (currentUser) {
+      this.setData({
+        user:currentUser
+      })
+    }
   }
 })

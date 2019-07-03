@@ -10,12 +10,17 @@ function setCurrentUser(user) {
 }
 
 function getCurrentUser() {
-  return wx.getStorageSync(CURRENT_USER_KEY)
+  let result = wx.getStorageSync(CURRENT_USER_KEY)
+  if (result) {
+    return result
+  }
+
+  return null
 }
 
 function getRole() {
   let user = getCurrentUser()
-  console.log(user)
+  
   if (null != user) {
     if (false == user.asOwner && false == user.asClerk) {
       return { 'role': ROLE_NORMAL, 'desc': '普通用户' }    
