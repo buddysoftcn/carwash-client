@@ -5,13 +5,15 @@ const ROLE_NORMAL = 0    // 用户授权登录，但没有绑定身份
 const ROLE_OWNER = 1      // 店长
 const ROLE_CLERK = 2      // 店员
 
+const CREDIT = [{'value':0,'desc':'信用较差'},{'value':50,'desc':'信用较好'},{'value':100,'desc':'信用极好'}]
+
 function setCurrentUser(user) {
   wx.setStorageSync(CURRENT_USER_KEY, user)
 }
 
 function getCurrentUser() {
   let result = wx.getStorageSync(CURRENT_USER_KEY)
-  if (result) {
+  if (result) {    
     return result
   }
 
@@ -34,10 +36,23 @@ function getRole() {
   return {'role':ROLE_NO_LOGIN,'desc':'未授权登录'}
 }
 
+function getCredit(value) {
+  let credit = null
+  for (let index = 0,size = CREDIT.length; index < size; index++) {
+    if (value == CREDIT[index].value) {
+      credit = CREDIT[index]
+      break
+    }
+  }
+
+  return credit
+}
+
 module.exports = {
   setCurrentUser: setCurrentUser,
   getCurrentUser: getCurrentUser,
   getRole: getRole,
+  getCredit: getCredit,
   ROLE_NO_LOGIN: ROLE_NO_LOGIN,
   ROLE_NORMAL: ROLE_NORMAL,
   ROLE_OWNER: ROLE_OWNER,

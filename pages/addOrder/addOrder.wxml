@@ -5,7 +5,7 @@
       <view bindtap="onAddCar" class="add-car-view"> <image class="add-car-view_image" src="../../images/add.png"/> <label class="font-size_17" style="margin-left:20rpx;">添加车牌</label></view>        
     </view>
 
-    <view class="weui-media-box weui-media-box_appmsg weui-cell_access" hover-class="weui-cell_active" bindtap="onShowPopView">
+    <view wx:if="{{null != currentPlate}}" class="weui-media-box weui-media-box_appmsg weui-cell_access" hover-class="weui-cell_active" bindtap="onShowPopView">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg-fixed">
             <image class="weui-media-box__thumb-fixed" src="../../images/car.png" />
         </view>

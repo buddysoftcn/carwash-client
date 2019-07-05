@@ -13,7 +13,7 @@ Page({
     vip:false,
     shop:null,
     user:null,
-    showAuthView: false  // 是否显示授权提示视图
+    showAuthView: false,  // 是否显示授权提示视图
   },
 
   /**
@@ -21,9 +21,9 @@ Page({
    */
   onLoad: function (options) {
     this.initShopView()
-
-    currentUser = userModel.getCurrentUser()
     this.initUserView()
+
+    this.updateUserInfo()
   },
 
   /**
@@ -58,7 +58,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.updateUserInfo()
   },
 
   /**
@@ -84,9 +84,23 @@ Page({
     if (event.detail.rawData) { // 允许授权
       getApp().login(event.detail, function (userInfo, message) {
         if (null != userInfo) {
-          userModel.setCurrentUser(userInfo)
-          currentUser = userInfo
+          userModel.setCurrentUser(userInfo)          
           that.checkUser()
+          that.initUserView()
+        }
+      })
+    }   
+  },
+
+  updateUserInfo:function() {
+    if (this.data.user) {
+      let that = this
+
+      getApp().getUserInfo(function (data) {
+        wx.stopPullDownRefresh()
+
+        if (data) {
+          currentUser = userModel.getCurrentUser()
           that.initUserView()
         }
       })
@@ -126,8 +140,9 @@ Page({
   },
 
   initUserView:function() {
-    console.log(currentUser)
-    if (currentUser) {
+    currentUser = userModel.getCurrentUser()        
+    if (currentUser) {      
+      currentUser.credit.desc = userModel.getCredit(currentUser.credit.value).desc
       this.setData({
         user:currentUser
       })

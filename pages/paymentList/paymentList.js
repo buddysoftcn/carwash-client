@@ -99,6 +99,8 @@ Page({
         }
       }else if ('finished' == orders[index].state) {
         orders[index].stateDesc = '已完成'
+      } else if ('discredit' == orders[index].state) {
+        orders[index].stateDesc = '车主违约'
       }
 
       orders[index].datetimeDesc = orders[index].date + ' ' + util.formatTime(orders[index].time)

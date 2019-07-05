@@ -126,21 +126,27 @@ Page({
       const washMinutes = shop.shopSetting.washMinutes
       const lunchTimeBegin = util.makeDate(currentDate + ' ' + shop.shopSetting.lunchTimeBegin)
       const lunchTimeEnd = util.makeDate(currentDate + ' ' + shop.shopSetting.lunchTimeEnd)
-      let worktime = null
+      let worktime = null, now = new Date()
 
       // 计算上午工作时间
       while (workTimeBegin < lunchTimeBegin && parseInt(lunchTimeBegin - workTimeBegin) / 1000 / 60 >= washMinutes) {
-        worktime = this.initWorktime(workTimeBegin)
-        worktimesMap.set(worktime.datetime, worktime)
+        if (now <= workTimeBegin) {
+          worktime = this.initWorktime(workTimeBegin)
+          worktimesMap.set(worktime.datetime, worktime)
+        }
+        
         workTimeBegin = this.makeNextWorktime(workTimeBegin, washMinutes)
       }
 
       workTimeBegin = lunchTimeEnd
 
       //计算下午工作时间
-      while (workTimeBegin < workTimeEnd && parseInt(workTimeEnd - workTimeBegin) / 1000 / 60 >= washMinutes) {
-        worktime = this.initWorktime(workTimeBegin)
-        worktimesMap.set(worktime.datetime, worktime)
+      while ( workTimeBegin < workTimeEnd && parseInt(workTimeEnd - workTimeBegin) / 1000 / 60 >= washMinutes) {
+        if (now <= workTimeBegin) {
+          worktime = this.initWorktime(workTimeBegin)
+          worktimesMap.set(worktime.datetime, worktime)
+        }
+                
         workTimeBegin = this.makeNextWorktime(workTimeBegin, washMinutes)
       }
     }

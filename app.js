@@ -1,7 +1,8 @@
 //app.js
 let buddysoft = require('/buddysoft/buddysoft.js')
 let request = require('/operation/operation.js')
-let notificationCenter = require('/utils/notification.js');
+let userModel = require('/model/user.js')
+let notificationCenter = require('/utils/notification.js')
 
 App({
   buddysoft: null,
@@ -45,10 +46,9 @@ App({
   // 更新用户信息请求
   getUserInfo: function (cb) {
     request.getRequest('/user/info', null, true)
-      .then(data => {
+      .then(data => {       
         if (request.SUCCESSED == data.status) {
-          userModel.setCurrentUser(data)
-
+          userModel.setCurrentUser(data)          
           cb(data)
         } else {
           cb(null)

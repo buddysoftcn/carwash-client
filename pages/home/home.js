@@ -77,7 +77,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getShopInfo()
+    this.getUnFinishedOrder()
   },
 
   /**
@@ -103,9 +104,7 @@ Page({
     if (userModel.ROLE_NO_LOGIN == role.role){
       authViewTemplate.showView(this, true)
     }else if (userModel.ROLE_NORMAL == role.role) {
-      wx.navigateTo({
-        url: '../worktimeList/worktimeList',
-      })
+      this.enterWorkTimeView()
     }
   },
 
@@ -155,6 +154,7 @@ Page({
   },
 
   bindGetUserInfo: function (event) {
+    let that = this
     this.setData({
       showAuthView: false
     })
@@ -165,9 +165,7 @@ Page({
         let role = userModel.getRole()
 
         if (userModel.ROLE_NORMAL == role.role) {
-          wx.navigateTo({
-            url: '../worktimeList/worktimeList',
-          })
+          that.enterWorkTimeView()
         } if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
           wx.showModal({
             title: '提示',
@@ -179,18 +177,28 @@ Page({
     })
   },
 
-
+  /**
+   * 获取商铺信息
+   */
   getShopInfo:function() {
     let that = this
 
     getShopInfoOperation.getShopInfo()
     .then(data => {
+      wx.stopPullDownRefresh()
       that.initView(data)
     }).catch(e => {
-
+      wx.stopPullDownRefresh()
+      wx.showToast({
+        title: e.msg,
+        icon:'none'
+      })
     })
   },
 
+  /**
+   * 获取用户未完成的订单
+   */
   getUnFinishedOrder:function() {
     let role = userModel.getRole(),that = this
     if (userModel.ROLE_NORMAL == role.role) {
@@ -221,6 +229,9 @@ Page({
     })
   },
 
+  /**
+   * 用户订单视图
+   */
   initOrderView:function(order) {
     if (order) {
       let uiDatetime = null, today = util.today(), tomorrow = util.tomorrow()
@@ -240,6 +251,30 @@ Page({
     this.setData({
       order:order
     })
+  },
+
+  /**
+   * 进入预约界面
+   */
+  enterWorkTimeView:function() {
+    let message = null, user = userModel.getCurrentUser()
+    if (null != this.data.order) {
+      message = '您有未完成的订单。如果您爱车已经清洗，请联系店铺完成您的订单。'
+    } else if (0 == user.credit.value) {
+      message = '您当前信用值较低，被限制在线预约服务。您可以联系店铺恢复信用值。'
+    }
+
+    if (null != message) {
+      wx.showModal({
+        title: '提示',
+        content: message,
+        showCancel:false
+      })
+    }else {      
+      wx.navigateTo({
+        url: '../worktimeList/worktimeList',
+      })
+    }    
   }
 
 })

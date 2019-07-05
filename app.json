@@ -7,8 +7,7 @@
     "pages/addOrder/addOrder",
     "pages/editCar/editCar",
     "pages/addOrderFinished/addOrderFinished",
-    
-    "pages/logs/logs",
+        
     "pages/announcementDetail/announcementDetail",
     "pages/goodsDetail/goodsDetail",
     "pages/creditList/creditList",

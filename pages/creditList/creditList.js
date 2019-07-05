@@ -1,4 +1,6 @@
 // pages/creditList/creditList.js
+let request = require('../../operation/operation.js')
+
 Page({
 
   /**
@@ -12,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getCredits()
   },
 
   /**
@@ -57,10 +59,13 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getCredits:function() {
+    request.getRequest('/credits',null,true)
+    .then(data => {
+      console.log(data)
+    }).catch(e => {
+      console.log(e)
+    })
   }
+
 })
