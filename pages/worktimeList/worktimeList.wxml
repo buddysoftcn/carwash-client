@@ -21,7 +21,7 @@
     <view class="weui-cells weui-cells_after-title">
       <view wx:for="{{item.worktimes}}" wx:key="this" wx:for-item="worktime" class="weui-cell">                
           <view class="weui-cell__bd">{{worktime.time}}</view>   
-          <view wx:if="{{null != worktime.order}}" class="weui-cell__ft weui-cell__ft_in-access order-list-cell_value font-size_16"><label style='width:116px;margin-right:20px;' class="font-size_13 font-color_888"></label><label class="font-weight">{{worktime.order.plateNumber}}</label></view>   
+          <view wx:if="{{null != worktime.order}}" class="weui-cell__ft order-list-cell_value font-size_16"><label style='width:116px;margin-right:20px;' class="font-size_13 font-color_888"></label><label class="font-weight">{{worktime.order.plateNumber}}</label></view>   
           <view wx:else class="weui-cell__ft order-list-cell_value"><view class="worktime-list_button font-size_14 font-weight_500" data-worktime="{{worktime}}" bindtap="onPayment">预约</view></view>           
       </view>
     </view>

@@ -1,5 +1,6 @@
 // pages/editCar/editCar.js
 let shopModel = require('../../model/shop.js')
+let plateModel = require('../../model/plate.js')
 let request = require('../../operation/operation.js')
 let carWash = require('../../utils/carWash.js')
 let mode = 'create'
@@ -84,15 +85,21 @@ Page({
         mask:true
       })
 
+      let params = { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc }
       if ('create' == mode) {
-        request.postRequest('/plates', { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc },true)
+        let plates = plateModel.getPlates()      
+        if (null == plates) { // 第一辆车默认绑定到会员卡         
+          params.binded = 1
+        }
+        
+        request.postRequest('/plates', params,true)
         .then(data => {
           that.back()
         }).catch(e => {
           that.showMessage(e)
         })
       }else if ('edit' == mode) {
-        request.putRequest('/plates/' + this.data.plate.sid, { 'number': number, 'carModelSid': this.data.carModels[this.data.carModelIndex].sid, 'desc': desc }, true)
+        request.putRequest('/plates/' + this.data.plate.sid, params, true)
           .then(data => {
             that.back()
           }).catch(e => {

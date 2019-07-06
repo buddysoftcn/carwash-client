@@ -60,7 +60,7 @@ Page({
   },
 
   getCredits:function() {
-    request.getRequest('/credits',null,true)
+    request.getRequest('/orders?category=client_orders&state=discredit',null,true)
     .then(data => {
       console.log(data)
     }).catch(e => {
