@@ -5,7 +5,13 @@ function setPlates(plates) {
 }
 
 function getPlates() {
-  return wx.getStorageSync(PLATES_KEY)
+  let result = wx.getStorageSync(PLATES_KEY)
+
+  if (result && 0 < result.length) {
+    return result
+  }
+
+  return null
 }
 
 module.exports = {
