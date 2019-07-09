@@ -21,8 +21,8 @@
       <view class="">     
         <view style='display: flex;flex-direction: column;align-items: left;'>
           <view class="font-size_13 font-color_vip">会员卡号 · {{user.member.serial}}</view>
-          <view style='margin-top:40rpx;margin-bottom:40rpx;' class="weui-flex"><view style='height:48rpx;line-height:48rpx;' class="font-size_14 font-color_white">卡内余额：</view><view style='font-size:48rpx;height:48rpx;line-height:48rpx;' class="font-weight_500 font-color_white">￥{{user.member.balance}}</view></view>
-          <view wx:if="{{0 != user.member.balance}}" style='color:#C7C7CC;' class="font-size_13">（有效期至 2022.3.15）</view>
+          <view style='margin-top:40rpx;margin-bottom:40rpx;' class="weui-flex"><view style='height:48rpx;line-height:48rpx;' class="font-size_14 font-color_white">卡内余额：</view><view style='font-size:48rpx;height:48rpx;line-height:48rpx;' class="font-weight_500 font-color_white">￥{{user.member.balance/100}}</view></view>
+          <view wx:if="{{0 != user.member.balance}}" style='color:#C7C7CC;' class="font-size_13">（有效期至 {{user.member.uiExpiredAt}}）</view>
           <view wx:else style='color:#C7C7CC;' class="font-size_13"> 充值请咨询工作人员 </view>
         </view>
       </view>

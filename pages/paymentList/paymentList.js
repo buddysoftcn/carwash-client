@@ -77,6 +77,7 @@ Page({
       wx.hideLoading()
       wx.showToast({
         title: e.msg,
+        icon:'none'
       })
     })    
   },
@@ -87,6 +88,8 @@ Page({
         orders[index].typeDesc = '预约洗车'
       }else if ( 1 == orders[index].type) {
         orders[index].typeDesc = '会员充值'
+      }else if (2 == orders[index].type) {
+        orders[index].typeDesc = '店内消费'
       }
 
       if ('created' == orders[index].state) {
@@ -98,12 +101,22 @@ Page({
           orders[index].stateDesc = '店员取消预约'
         }
       }else if ('finished' == orders[index].state) {
-        orders[index].stateDesc = '已完成'
+        if (0 == orders[index].type) {
+          orders[index].stateDesc = '已完成'  
+        }else {
+          orders[index].stateDesc = '交易完成'  
+        }
+        
       } else if ('discredit' == orders[index].state) {
         orders[index].stateDesc = '车主违约'
       }
 
-      orders[index].datetimeDesc = orders[index].date + ' ' + util.formatTime(orders[index].time)
+      if (orders[index].date) {
+        orders[index].datetimeDesc = orders[index].date + ' ' + util.formatTime(orders[index].time)
+      }else {
+        orders[index].datetimeDesc = ''
+      }
+      
     }
 
     this.setData({

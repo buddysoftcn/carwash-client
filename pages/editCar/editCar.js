@@ -103,7 +103,7 @@ Page({
           .then(data => {
             that.back()
           }).catch(e => {
-            that.showMessage(e)
+            that.showMessage(e)            
           })
       }      
     }

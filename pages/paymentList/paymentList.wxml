@@ -1,17 +1,21 @@
 <!--pages/paymentList/paymentList.wxml-->
 <view wx:for="{{orders}}" wx:key="*this" wx:for-item="order" class="cell">
   <view class="weui-flex cell-content">
-    <view style=''><image mode="aspectFit" class="cell-car_img" src="../../images/car.png"></image><text class="font-size_13">{{order.typeDesc}}</text></view>
+    <view style=''>
+      <image wx:if="{{ 0 == order.type}}" mode="aspectFit" class="cell-car_img" src="../../images/car.png"></image>
+      <image wx:else mode="aspectFit" class="cell-car_img" src="../../images/money.png"></image>
+      <text class="font-size_13">{{order.typeDesc}}</text>
+    </view>
     <view style='color:#F7B500;' class="font-size_13 font-weight_500 text-align_right">{{order.stateDesc}}</view>
   </view>
 
    <view style='margin-top:10rpx;margin-bottom:10rpx;' class="weui-flex cell-content">
-    <view style=''><text class="cell-car_number font-size_13">车牌号：</text><text class="font-size_13">{{order.plateNumber}}</text></view>
-    <view wx:if="{{'finished' == order.state}}" style='' class="text-align_right"><text style='padding-right:10rpx;' class="font-color_4a font-size_13">{{order.payTypeName}}</text><text class="font-size_13">￥{{order.amount/100}}</text></view>
+    <view><text wx:if="{{1 != order.type}}" class="cell-car_number font-size_13">车牌号：</text><text wx:if="{{1 != order.type}}" class="font-size_13">{{order.plateNumber}}</text></view>
+    <view wx:if="{{'finished' == order.state}}" style='' class="text-align_right"><text wx:if="{{null != order.payTypeName}}" style='padding-right:10rpx;' class="font-color_4a font-size_13">{{order.payTypeName}}</text><text class="font-size_13">￥{{order.amount/100}}</text></view>
   </view>
 
    <view class="weui-flex cell-content">
-    <view style=''><image class="cell-car_oval" src="../../images/oval.png"></image><text class="cell-car_employe">店员：毛毛要吃鱼</text></view>
+    <view style=''><image wx:if="{{null != order.clerk}}" class="cell-car_oval" src="{{order.clerk.avatarUrl}}"></image><text wx:if="{{null != order.clerk}}" class="cell-car_employe">店员：{{order.clerk.nickName}}</text></view>
     <view style='color:#6D7278;' class="font-size_13 text-align_right">{{order.datetimeDesc}}</view>
    </view>
 </view>

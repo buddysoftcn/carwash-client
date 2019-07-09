@@ -1,5 +1,7 @@
 // pages/creditList/creditList.js
 let request = require('../../operation/operation.js')
+let userModel = require('../../model/user.js')
+let shopModel = require('../../model/shop.js')
 
 Page({
 
@@ -7,7 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    creditValue:100,
+    discreditUserBanDays:30,
+    orders:[]
   },
 
   /**
@@ -15,6 +19,8 @@ Page({
    */
   onLoad: function (options) {
     this.getCredits()
+
+    this.initView()
   },
 
   /**
@@ -60,11 +66,34 @@ Page({
   },
 
   getCredits:function() {
+    let that = this
+
+    wx.showLoading({
+      title: '请稍候',
+    })
+
     request.getRequest('/orders?category=client_orders&state=discredit',null,true)
     .then(data => {
-      console.log(data)
+      wx.hideLoading()
+      that.setData({
+        orders:data.items
+      })
     }).catch(e => {
-      console.log(e)
+      wx.hideLoading()        
+      wx.showToast({
+        title: e.msg,
+        icon:'none'
+      })
+    })
+  },
+
+  initView:function() {
+    let currentUser = userModel.getCurrentUser()
+    let shopSetting = shopModel.getShopInfo().shopSetting
+    console.log(shopSetting)
+    this.setData({
+      creditValue:currentUser.credit.value,
+      discreditUserBanDays: shopSetting.discreditUserBanDays
     })
   }
 

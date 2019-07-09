@@ -143,6 +143,7 @@ Page({
     currentUser = userModel.getCurrentUser()        
     if (currentUser) {      
       currentUser.credit.desc = userModel.getCredit(currentUser.credit.value).desc
+      currentUser.member.uiExpiredAt = currentUser.member.expiredAt.substring(0,11)
       this.setData({
         user:currentUser
       })
