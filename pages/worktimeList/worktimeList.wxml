@@ -1,16 +1,16 @@
 <!--pages/worktimeList/worktimeList.wxml-->
 <view class="weui-flex">
   <!-- 今天 -->
-  <view class="date-view">
-    <view class="weui-flex center"><view class="circel-green"></view><view class="font-size_17 font-weight_500">今天</view></view>
-    <view style="text-align: center" class="font-size_14">{{days[0].uiDate}} {{days[0].week}}</view>
+  <view class="date-view" bindtap='onShowToday'>
+    <view class="weui-flex center"><view wx:if="{{'today' == mode}}" class="circel-green"></view><view class="font-size_17 font-weight_500 {{'today' != mode?'font-color_6d' : ''}}">今天</view></view>
+    <view style="text-align: center" class="font-size_14 {{'today' != mode?'font-color_9b' : ''}}">{{days[0].uiDate}} {{days[0].week}}</view>
   </view>
   <view class="date-view_line">
   </view>
   <!-- 明天 -->
-  <view class="date-view">
-    <view class="weui-flex center"><view class="font-size_17 font-weight_500 font-color_6d">明天</view></view>
-    <view style="text-align: center" class= "font-size_14 font-color_9b">{{days[1].uiDate}} {{days[1].week}}</view>
+  <view class="date-view" bindtap='onShowTomorrow'>
+    <view class="weui-flex center"><view wx:if="{{'tomorrow' == mode}}" class="circel-green"></view><view class="font-size_17 font-weight_500 {{'today' == mode?'font-color_6d' : ''}}">明天</view></view>
+    <view style="text-align: center" class= "font-size_14 {{'today' == mode?'font-color_9b' : ''}}">{{days[1].uiDate}} {{days[1].week}}</view>
   </view>
 </view>
 

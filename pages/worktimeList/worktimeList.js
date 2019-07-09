@@ -14,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    mode:'today', // 查看今天还是明天
     days:[],
     worktimes: []
   },
@@ -73,6 +74,25 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+
+  /**
+   * 点击今天事件按钮
+   */
+  onShowToday:function() {
+    currentDate = util.today()
+    this.initWorktimeList()
+    this.setData({
+      mode:'today'
+    })
+  },
+
+  onShowTomorrow:function() {
+    currentDate = util.tomorrow()
+    this.initWorktimeList()
+    this.setData({
+      mode: 'tomorrow'
+    })
   },
 
   onPayment:function (event) {
