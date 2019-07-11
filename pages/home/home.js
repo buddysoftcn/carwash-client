@@ -105,6 +105,12 @@ Page({
       authViewTemplate.showView(this, true)
     }else if (userModel.ROLE_NORMAL == role.role) {
       this.enterWorkTimeView()
+    } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_CLERK == role.role) {
+      wx.showModal({
+        title: '提示',
+        content: '请登录店铺端小程序',
+        showCancel: false
+      })
     }
   },
 
@@ -166,7 +172,7 @@ Page({
 
         if (userModel.ROLE_NORMAL == role.role) {
           that.enterWorkTimeView()
-        } if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+        } if (userModel.ROLE_OWNER == role.role || userModel.ROLE_CLERK == role.role) {
           wx.showModal({
             title: '提示',
             content: '请登录店铺端小程序',

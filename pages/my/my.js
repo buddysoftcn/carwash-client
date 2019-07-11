@@ -119,7 +119,7 @@ Page({
       this.setData({        
         vip:true        
       })
-    } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+    } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_CLERK == role.role) {
       wx.showModal({
         title: '提示',
         content: '请登录店铺端小程序',
