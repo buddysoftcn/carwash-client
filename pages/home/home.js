@@ -103,8 +103,8 @@ Page({
 
     if (userModel.ROLE_NO_LOGIN == role.role){
       authViewTemplate.showView(this, true)
-    }else if (userModel.ROLE_NORMAL == role.role) {
-      this.enterWorkTimeView()
+    }else {
+      this.enterWorkTimeView(role)
     }
   },
 
@@ -161,18 +161,8 @@ Page({
 
     getApp().login(event.detail, function (userInfo, message) {
       if (null != userInfo) {
-        userModel.setCurrentUser(userInfo)
-        let role = userModel.getRole()
-
-        if (userModel.ROLE_NORMAL == role.role) {
-          that.enterWorkTimeView()
-        } if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
-          wx.showModal({
-            title: '提示',
-            content: '请登录店铺端小程序',
-            showCancel:false
-          })
-        }
+        userModel.setCurrentUser(userInfo)        
+        that.enterWorkTimeView(userModel.getRole())      
       }
     })
   },
@@ -256,13 +246,16 @@ Page({
   /**
    * 进入预约界面
    */
-  enterWorkTimeView:function() {
+  enterWorkTimeView:function(role) {
     let message = null, user = userModel.getCurrentUser()
     if (null != this.data.order) {
       message = '您有未完成的订单。如果您爱车已经清洗，请联系店铺完成您的订单。'
     } else if (0 == user.credit.value) {
       message = '您当前信用值较低，被限制在线预约服务。您可以联系店铺恢复信用值。'
     }
+    // } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+    //   message = '请登录店铺端小程序'
+    // }
 
     if (null != message) {
       wx.showModal({

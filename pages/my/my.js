@@ -74,7 +74,7 @@ Page({
     })
   },
 
-  bindGetUserInfo: function (event) {    
+  bindGetUserInfo: function (event) {       
     let that = this
 
     this.setData({
@@ -89,7 +89,11 @@ Page({
           that.initUserView()
         }
       })
-    }   
+    }else {
+      wx.switchTab({
+        url: '../home/home',
+      })
+    }  
   },
 
   updateUserInfo:function() {
@@ -143,7 +147,12 @@ Page({
     currentUser = userModel.getCurrentUser()        
     if (currentUser) {      
       currentUser.credit.desc = userModel.getCredit(currentUser.credit.value).desc
-      currentUser.member.uiExpiredAt = currentUser.member.expiredAt.substring(0,11)
+      if (currentUser.member.expiredAt) {
+        currentUser.member.uiExpiredAt = currentUser.member.expiredAt.substring(0, 11)
+      }else {
+        currentUser.member.uiExpiredAt = ''
+      }
+      
       this.setData({
         user:currentUser
       })

@@ -15,8 +15,11 @@ Page({
    */
   data: {
     mode:'today', // 查看今天还是明天
-    days:[],
-    worktimes: []
+    days:[],  // 今天、明天日期信息
+    worktimes: [], // 预约时间列表
+    holiday:false,
+    holidayDay:'',
+    holidayDate:''
   },
 
   /**
@@ -24,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     shop = shopModel.getShopInfo()
-    currentDate = util.today()
+    currentDate = util.today()    
 
     wx.setNavigationBarTitle({
       title: shop.shop.name,
@@ -116,6 +119,12 @@ Page({
     })
   },
 
+  onBack:function() {
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+
   initDaysView:function() {
     let days = [],date = null
     date = util.today()    
@@ -130,9 +139,11 @@ Page({
   },
 
   initWorktimeList: function () {
-    this.initWorktimesMap()
-    this.initWorktimes()    
-    this.getOrders()
+    if (false == this.initHolidayView()) {
+      this.initWorktimesMap()
+      this.initWorktimes()
+      this.getOrders()
+    }    
   },
 
   initWorktimesMap: function () {
@@ -248,6 +259,35 @@ Page({
     datetime = datetime.setMinutes(datetime.getMinutes() + washMinutes) // 计算向后的时间
     datetime = new Date(datetime)
     return datetime
+  },
+
+  /**
+   * 初始化假期视图
+   */
+  initHolidayView:function() {
+    if (shop) {            
+      if (null != shop.shopSetting.restBegin && null != shop.shopSetting.restEnd && (shop.shopSetting.restBegin <= currentDate && shop.shopSetting.restEnd >= currentDate)) {
+        let holidayDay = '今天'
+
+        if (currentDate == this.data.days[1].date) {
+          holidayDay = '明天'
+        }
+        this.setData({
+          holiday:true,
+          holidayDay: holidayDay,
+          holidayDate: util.formatDate(shop.shopSetting.restBegin) + ' - ' + util.formatDate(shop.shopSetting.restEnd)
+        })
+        return true
+      }
+    }
+
+    this.setData({
+      holiday: false,
+      holidayDay:'',
+      holidayDate:''
+    })
+   
+    return false
   }
 
 })

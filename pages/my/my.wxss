@@ -39,8 +39,9 @@
   line-height: 88rpx;
   border: 1rpx solid #F7B500;
   border-radius: 44rpx;
-  color:#F7B500;
+  color:#F7B500;  
   text-align: center;
+  background-color:   
 }
 
 .card-view_content-oval {

@@ -16,7 +16,8 @@
 
 <!-- 预约列表视图 -->
 <view style='margin-top:0rpx;'>
-  <block wx:for="{{worktimes}}" wx:key="this">
+
+  <block wx:if="{{false == holiday}}" wx:for="{{worktimes}}" wx:key="this">
     <view class="weui-cells__title">{{item.hour}}点</view>
     <view class="weui-cells weui-cells_after-title">
       <view wx:for="{{item.worktimes}}" wx:key="this" wx:for-item="worktime" class="weui-cell">                
@@ -26,4 +27,22 @@
       </view>
     </view>
   </block>
+
+  <block wx:if="{{true == holiday}}">
+     <view class="weui-msg">
+      <view class="weui-msg__icon-area">
+          <icon type="warn" size="93" color="#fbbe3e"></icon>
+      </view>
+      <view class="weui-msg__text-area">
+          <view class="weui-msg__title">{{holidayDay}}休息</view>
+          <view class="weui-msg__desc">本店休息日是 {{holidayDate}}。请您在预约时避开该时间段。</view>
+      </view>
+      <view class="weui-msg__opr-area">
+          <view class="weui-btn-area">              
+              <button class="weui-btn" plain="true" type="primary" bindtap='onBack'>返回</button>              
+          </view>
+      </view>      
+  </view>
+  </block>
+
 </view>
