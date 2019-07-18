@@ -40,7 +40,7 @@
 <view class="goods-cells">
   <view wx:for="{{goods}}" wx:key="*this" wx:for-item="goods" class="goods-cell weui-flex" data-goods="{{goods}}" bindtap='onShowGoods'>
     <image mode="aspectFill" lazy-load="true" class="goods-cell_image" src="{{goods.images[0].url}}" />
-    <view class="">
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">{{goods.name}}</view>
         <view class="font-size_17 font-weight_500 font-color_fa6400">￥{{goods.price}}</view>
         <view class="goods-discount">{{goods.discount}}折</view>

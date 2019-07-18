@@ -35,6 +35,10 @@ App({
             }
           }).catch(e => {
             cb(null, '登录失败')
+            wx.showToast({
+              title: e.msg,
+              icon: 'none'
+            })
           })
       },
       fail: function (res) {
@@ -57,6 +61,26 @@ App({
         cb(null)
       })
   },
+
+  /**
+   * 当用户账号在别的地方登录时，再次让用户重新登录
+   */
+  showLoginPrompt: function () {
+    wx.showModal({
+      title: '提示',
+      content: '账号在别处登录，请重新登录',
+      showCancel: false,
+      success(res) {
+        if (res.confirm) {
+          userModel.removeCurrentUser()
+          wx.reLaunch({
+            url: '../../pages/home/home',
+          })
+        }
+      }
+    })
+  },
+
 
   globalData: {
     param:{}

@@ -252,10 +252,9 @@ Page({
       message = '您有未完成的订单。如果您爱车已经清洗，请联系店铺完成您的订单。'
     } else if (0 == user.credit.value) {
       message = '您当前信用值较低，被限制在线预约服务。您可以联系店铺恢复信用值。'
+    }else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
+      message = '请登录店铺端小程序'
     }
-    // } else if (userModel.ROLE_OWNER == role.role || userModel.ROLE_OWNER == role.role) {
-    //   message = '请登录店铺端小程序'
-    // }
 
     if (null != message) {
       wx.showModal({

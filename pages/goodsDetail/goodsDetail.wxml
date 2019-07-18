@@ -17,4 +17,6 @@
 
 <view class="title margin-left_16 margin-right_16 font-weight_500 font-color_red">￥ {{goods.price}}</view>
 <view class="margin-top_16 margin-left_16 font-color_999 font-size_13">商品介绍</view>
-<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">{{goods.name}}</view>
+<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">
+  <text>{{goods.name}}</text>
+</view>

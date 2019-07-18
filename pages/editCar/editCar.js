@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    plateNumber:'',
     plate:null,
     carModels:[],
     carModelIndex:0
@@ -70,6 +71,14 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+
+  bindPlateNumberInput: function (event) {
+    let value = event.detail.value
+
+    this.setData({
+      plateNumber: value.toUpperCase()
+    })
   },
 
   onSave:function(event) {
@@ -135,6 +144,7 @@ Page({
       }
     }
     this.setData({
+      plateNumber:plate.number,
       plate:plate,
       carModelIndex: carModelIndex
     })

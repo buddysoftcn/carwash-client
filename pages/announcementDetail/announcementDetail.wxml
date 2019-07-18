@@ -17,4 +17,6 @@
 
 <view class="title margin-left_16 font-weight_500">{{annoucement.title}}</view>
 <view class="margin-top_16 margin-left_16 margin-right_16 font-color_999 font-size_13">通知详情</view>
-<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">{{annoucement.desc}}</view>
+<view class="margin-left_16 margin-right_16 font-size_14 font-weight_500">
+  <text>{{annoucement.desc}}</text>
+</view>
