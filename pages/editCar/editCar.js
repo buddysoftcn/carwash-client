@@ -25,7 +25,9 @@ Page({
     if (options.mode) {
       mode = options.mode
       this.initPlate()
-    }    
+    }else {
+      mode = 'create'
+    }   
   },
 
   /**
