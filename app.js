@@ -72,6 +72,7 @@ App({
       showCancel: false,
       success(res) {
         if (res.confirm) {
+          wx.clearStorageSync()
           userModel.removeCurrentUser()
           wx.reLaunch({
             url: '../../pages/home/home',

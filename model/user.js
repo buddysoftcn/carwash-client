@@ -32,7 +32,7 @@ function getRole() {
       return { 'role': ROLE_NORMAL, 'desc': '普通用户' }    
     }else if (true == user.asOwner) {
       return { 'role': ROLE_OWNER, 'desc': '店长' }    
-    }else if (true == user.asClerk) {
+    }else if (false != user.asClerk) {
       return { 'role': ROLE_CLERK, 'desc': '店员' }    
     }
   }

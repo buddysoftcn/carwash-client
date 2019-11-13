@@ -1,0 +1,9 @@
+
+// 内部消息
+const UPDATE_PLATE_MESSAGE = 'updatePlateMessage'
+const UPDATE_ORDER_MESSAGE = 'updateOrderMessage'
+
+module.exports = {
+  UPDATE_PLATE_MESSAGE : UPDATE_PLATE_MESSAGE,
+  UPDATE_ORDER_MESSAGE : UPDATE_ORDER_MESSAGE
+}
